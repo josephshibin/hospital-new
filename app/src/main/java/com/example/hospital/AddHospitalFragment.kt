@@ -17,10 +17,7 @@ import com.example.hospital.model.SharedViewModel
 
 
 class AddHospitalFragment : Fragment() {
-    lateinit var hospitalName:EditText
-    lateinit var speciality:EditText
-    lateinit var location:EditText
-    lateinit var saveBtn:Button
+
     //lateinit var nameOfHospital:String
    // private  val fragmentViewModel: FragmentViewModel by viewModels()
 
@@ -37,8 +34,8 @@ class AddHospitalFragment : Fragment() {
 
         // nameOfHospital=hospitalName.text.toString()
         //Log.i("name",nameOfHospital)
-        val hospitalSpeciality=speciality.text
-        val hospitalLocation=location.text
+//        val hospitalSpeciality=speciality.text
+//        val hospitalLocation=location.text
 
            // val bundle=Bundle()
             //bundle.put...
@@ -55,10 +52,10 @@ class AddHospitalFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        hospitalName=view.findViewById(R.id.etHospitalName)
-        saveBtn=view.findViewById(R.id.btnSave)
-        speciality=view.findViewById(R.id.etSpeciality)
-        location=view.findViewById(R.id.etLocation)
+        val hospitalName:EditText = view.findViewById(R.id.etHospitalName)
+        val saveBtn:Button = view.findViewById(R.id.btnSave)
+        val speciality:EditText = view.findViewById(R.id.etSpeciality)
+        val location:EditText = view.findViewById(R.id.etLocation)
         val model = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         saveBtn.setOnClickListener {
              val nameOfHospital=hospitalName.text.toString()

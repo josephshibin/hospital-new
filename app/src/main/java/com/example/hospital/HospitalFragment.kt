@@ -15,19 +15,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hospital.Adapter.HospitalAdapter
 import com.example.hospital.model.HospitalData
 import com.example.hospital.model.SharedViewModel
 
 //import com.example.hospital.model.FragmentViewModel
 
 class HospitalFragment : Fragment() {
+    lateinit var  hospitalDataStoredList: ArrayList<HospitalData>
 
     //private  val fragmentViewModel: FragmentViewModel by viewModels()
     //lateinit var hospitalName:String
      //var hn="zs"
-    lateinit var hospitalDataStoredList: ArrayList<HospitalData>
-    lateinit var recyclerView:RecyclerView
+
+    private lateinit var recyclerView:RecyclerView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -37,28 +40,35 @@ class HospitalFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = "Hospitals"
         // Inflate the layout for this fragment
         val view:View= inflater.inflate(R.layout.fragment_hospital, container, false)
+        recyclerView=view.findViewById(R.id.recyclerView)
+        //recyclerView=view.findViewById(R.id.recyclerView)
+        //recyclerView.layoutManager=LinearLayoutManager(this@HospitalFragment)
+//        hospitalDataStoredList= ArrayList()
+//        recyclerView.layoutManager = LinearLayoutManager(context);
+//        val adapter=HospitalAdapter(this,hospitalDataStoredList)
+//        recyclerView.adapter=adapter
+
 
         setHasOptionsMenu(true)
-       //  val hospitalName= arguments?.getString("hospitalName").toString()
-//             fragmentViewModel.hospitalName.observe(viewLifecycleOwner) {
-//                 //Log.i("NAME", it)
-//                 hospitalName=it
-//                 Log.i("Name",hospitalName)
-//
-//
-//             }
-// Log.i("Name",hospitalName)
-        //Log.i("nnnn",hn)
+
         return view
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView=view.findViewById(R.id.recyclerView)
+
+
         val model = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         val tv:TextView=view.findViewById(R.id.textView3)
         model.hospitalData.observe(viewLifecycleOwner, Observer {
-            addingItemToList(it)
+            hospitalDataStoredList= ArrayList()
+            recyclerView.layoutManager = LinearLayoutManager(context);
+            val adapter=HospitalAdapter(this,addingItemToList(it))
+            recyclerView.adapter=adapter
+
         })
+
 
 
 
@@ -70,10 +80,7 @@ class HospitalFragment : Fragment() {
 
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        Log.i("nnnnn",hn)
-//    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.
@@ -82,7 +89,9 @@ class HospitalFragment : Fragment() {
     }
 
     fun addingItemToList(hospitalData:HospitalData): ArrayList<HospitalData> {
+
         hospitalDataStoredList.add(HospitalData(hospitalData.hospitalName,hospitalData.hospitalSpeciality,hospitalData.hospitalLocation))
+        Log.i("name",hospitalDataStoredList.toString())
         return hospitalDataStoredList
     }
 
