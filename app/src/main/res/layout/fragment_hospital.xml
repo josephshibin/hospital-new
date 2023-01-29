@@ -12,12 +12,19 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="557dp">
+        android:layout_height="436dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="548dp" />
+            android:layout_height="436dp" />
+
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 </LinearLayout>
