@@ -19,6 +19,9 @@
         <argument
             android:name="location"
             app:argType="string" />
+        <action
+            android:id="@+id/action_hospitalFragment_to_hospitalDetailsFragment"
+            app:destination="@id/hospitalDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addHospitalFragment"
@@ -29,4 +32,9 @@
             android:id="@+id/action_addHospitalFragment_to_hospitalFragment"
             app:destination="@id/hospitalFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/hospitalDetailsFragment"
+        android:name="com.example.hospital.HospitalDetailsFragment"
+        android:label="fragment_hospital_details"
+        tools:layout="@layout/fragment_hospital_details" />
 </navigation>

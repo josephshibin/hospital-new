@@ -5,14 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +19,7 @@ import com.example.hospital.model.SharedViewModel
 //import com.example.hospital.model.FragmentViewModel
 
 class HospitalFragment : Fragment() {
-    lateinit var  hospitalDataStoredList: ArrayList<HospitalData>
+
 
     //private  val fragmentViewModel: FragmentViewModel by viewModels()
     //lateinit var hospitalName:String
@@ -41,11 +36,10 @@ class HospitalFragment : Fragment() {
         // Inflate the layout for this fragment
         val view:View= inflater.inflate(R.layout.fragment_hospital, container, false)
         recyclerView=view.findViewById(R.id.recyclerView)
-        //recyclerView=view.findViewById(R.id.recyclerView)
-        //recyclerView.layoutManager=LinearLayoutManager(this@HospitalFragment)
-//        hospitalDataStoredList= ArrayList()
 //        recyclerView.layoutManager = LinearLayoutManager(context);
-//        val adapter=HospitalAdapter(this,hospitalDataStoredList)
+//        val adapter=HospitalAdapter(this,
+//            SharedViewModel.hospitalDataStoredList as List<HospitalData>
+//        )
 //        recyclerView.adapter=adapter
 
 
@@ -60,14 +54,14 @@ class HospitalFragment : Fragment() {
 
 
         val model = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
-        val tv:TextView=view.findViewById(R.id.textView3)
-        model.hospitalData.observe(viewLifecycleOwner, Observer {
-            hospitalDataStoredList= ArrayList()
-            recyclerView.layoutManager = LinearLayoutManager(context);
-            val adapter=HospitalAdapter(this,addingItemToList(it))
-            recyclerView.adapter=adapter
+        recyclerView.layoutManager = LinearLayoutManager(context);
 
-        })
+       model.hospitalDataStoredList.observe(viewLifecycleOwner, Observer {
+           val adapter= model.hospitalDataStoredList.value?.let { HospitalAdapter(this, it) }
+            recyclerView.adapter=adapter
+           Log.i("arraylist", it.toString())
+
+       })
 
 
 
@@ -88,11 +82,6 @@ class HospitalFragment : Fragment() {
                 || super.onOptionsItemSelected(item)
     }
 
-    fun addingItemToList(hospitalData:HospitalData): ArrayList<HospitalData> {
-
-        hospitalDataStoredList.add(HospitalData(hospitalData.hospitalName,hospitalData.hospitalSpeciality,hospitalData.hospitalLocation))
-        Log.i("name",hospitalDataStoredList.toString())
-        return hospitalDataStoredList
-    }
+//
 
 }

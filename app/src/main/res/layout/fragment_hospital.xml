@@ -6,25 +6,15 @@
     android:orientation="vertical"
     tools:context=".HospitalFragment">
 
-    <SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="436dp">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="436dp" />
+            android:layout_height="match_parent" />
 
     </FrameLayout>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
 
 </LinearLayout>
